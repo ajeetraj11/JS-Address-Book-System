@@ -1,28 +1,33 @@
 const fs = require('fs');
 class AddressBook {
     constructor() {
-        this.filePath = 'contacts.json';
-        this.contacts = this.loadContacts();
+        this.filePath = 'addressBooks.json';
+        this.addressBooks = this.loadAddressBooks();
     }
 
     // Load contacts from a file (instead of localStorage)
-    loadContacts() {
+    loadAddressBooks() {
         try {
             if (fs.existsSync(this.filePath)) {
                 const data = fs.readFileSync(this.filePath, 'utf8');
                 return JSON.parse(data);
             }
         } catch (error) {
-            console.error("Error loading contacts:", error);
+            console.error("Error loading addressBooks:", error);
         }
         return [];
+    }  
+
+    // Save address books to a file
+    saveAddressBooks() {
+        try {
+            fs.writeFileSync(this.filePath, JSON.stringify(this.addressBooks, null, 2),'utf-8');
+        } catch (error) {
+            console.error("Error saving address books:", error);
+        }
     }
 
-    // Save contacts to a file (instead of localStorage)
-    saveContacts() {
-        fs.writeFileSync(this.filePath, JSON.stringify(this.contacts, null, 2), 'utf8');
-    } 
-
+    // validateContact method to validate the fields (fields must follow the rules)
     validateContact(firstName, lastName, address, city, state, zip, phone, email) { 
          // Starts with a capital, min 3 chars
         const nameRegex = /^[A-Z][a-zA-Z]{2,}$/;  
@@ -49,38 +54,67 @@ class AddressBook {
         if (!emailRegex.test(email)) throw new Error("Invalid Email Address.");
     }
 
-    addContact(firstName, lastName, address, city, state, zip, phone, email) { 
+    // addContact method to create contact in AddressBook
+    addContact(bookName, firstName, lastName, address, city, state, zip, phone, email) {   
+
+        if (!this.addressBooks[bookName]) {
+            console.log(`Address Book '${bookName}' does not exist.`);
+            return;
+        }
         try{  
          // Validation of contact details   
         this.validateContact(firstName, lastName, address, city, state, zip, phone, email); 
 
         // Creating a new contact object
         const contact = { firstName, lastName, address, city, state, zip, phone, email };
-        this.contacts.push(contact); 
+          this.addressBooks[bookName].push(contact);
 
         //Saving the contacts to a file
-        this.saveContacts();  
+        this.saveAddressBooks();  
         console.log("Contact added successfully.");
         }catch(error){
             console.error("Error adding contact:", error.message);
         }
-    }
+    } 
 
-    getContacts() {
-        return this.contacts;
-    }
-
-    deleteContact(index) {
-        if (index < 0 || index >= this.contacts.length) {
-            throw new Error("Invalid index.");
+    // viewConatacts to see the contacts details
+    viewContacts(bookName) {
+        if (!this.addressBooks[bookName]) {
+            console.log(`Address Book '${bookName}' does'nt exist.`);
+            return;
         }
-        this.contacts.splice(index, 1);
-        this.saveContacts();
+        console.log(`Contacts in '${bookName}':`, this.addressBooks[bookName]);
+    }
+
+    // deleteAddressBook to delete the Address Book if exists 
+    deleteAddressBook(bookName) {
+        if (!this.addressBooks[bookName]) {
+            console.log(`Address Book '${bookName}' does not exist.`);
+            return;
+        }
+        delete this.addressBooks[bookName];
+        this.saveAddressBooks();
+        console.log(`Address Book '${bookName}' deleted successfully.`);
+    }
+    
+    // CreateAddressBook Method to create addressBook using name (if exists provide message already exists)
+    createAddressBook(name) {
+        if (this.addressBooks[name]) {
+            console.log(`Address Book '${name}' already exists.`);
+            return;
+        }
+        this.addressBooks[name] = [];
+        this.saveAddressBooks();
+        console.log(`New Address Book '${name}' created successfully.`);
     }
 }
 
 // Example Usage to create an address book and add a contact
-const addressBook = new AddressBook();
-addressBook.addContact('Ajeet', 'Raj', '10 KalpanaNagar', 'India', 'IN', '11072003', '1234567890', 'ajeet@gmail.com');
+const addressBookApp = new AddressBook(); 
+addressBookApp.createAddressBook("Ajeet-Personal"); 
+addressBookApp.addContact("Ajeet-Personal", "Ajeet", "Raj", "10 KalpanaNagar", "Bhopal", "Madhyapradesh", "110720", "6203106618", "ajeet.raj@example.com");
+addressBookApp.viewContacts("Ajeet-Personal"); 
 
-console.log("Contacts:", addressBook.getContacts());
+addressBookApp.createAddressBook("Ajeet-Work");
+addressBookApp.addContact("Ajeet-Work", "Amit", "Pawar", "110 Sec-A Bhopal", "Bhopal-DDX", "Bihar", "78001", "9113173522", "amit.pawar@example.com");
+addressBookApp.viewContacts("Ajeet-Work");
