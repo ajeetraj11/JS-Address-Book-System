@@ -1,0 +1,12 @@
+[
+  {
+    "firstName": "Ajeet",
+    "lastName": "Raj",
+    "address": "10 KalpanaNagar",
+    "city": "India",
+    "state": "IN",
+    "zip": "11072003",
+    "phone": "1234567890",
+    "email": "ajeet@gmail.com"
+  }
+]
