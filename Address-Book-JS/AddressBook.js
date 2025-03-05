@@ -284,7 +284,18 @@ class AddressBook {
     console.log("Contact Count by City:", cityCount);
     console.log("Contact Count by State:", stateCount);
     console.log(`Total contacts found: ${results.length}`);
-  }
+  } 
+  
+  // sortByName method to sort the contacts by name
+  sortByName() {
+    Object.keys(this.addressBooks).forEach(bookName => {
+        this.addressBooks[bookName].sort((a, b) => 
+            a.name.toLowerCase().localeCompare(b.name.toLowerCase())
+        );
+    });
+
+    console.log("Address book sorted by name:", this.addressBooks);
+}
   
   
 }
@@ -299,8 +310,8 @@ addressBookApp.addContact(
   "121 Sec-A Bhopal",
   "Bhopal",
   "Madhyapradesh",
-  "271203",
-  "6203106619",
+  "110720",
+  "9770543210",
   "ajeet.raj@example.com"
 );
 addressBookApp.viewContacts("Ajeet-Personal");
@@ -315,7 +326,7 @@ addressBookApp.addContact(
   "Bihar",
   "88101",
   "9113173522",
-  "vishal.kumar@example.com"
+  "vishal.pawar@example.com"
 );
 addressBookApp.viewContacts("Ajeet-Work");
 
@@ -326,4 +337,6 @@ addressBookApp.editContact("Ajeet-Personal", "Ajeet", "Raj", {
 addressBookApp.deleteContact("Ajeet-Personal", "Ajeet", "Raj");
 addressBookApp.countContacts("Ajeet-Work"); 
 
-addressBookApp.searchByCityOrState("Bhopal");
+addressBookApp.searchByCityOrState("Bhopal"); 
+
+addressBookApp.sortByName();
