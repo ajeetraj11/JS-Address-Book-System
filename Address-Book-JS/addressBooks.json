@@ -1,25 +1,15 @@
 {
-  "Ajeet-Personal": [
+  "Ajeet-Personal": [],
+  "Ajeet-Work": [
     {
-      "firstName": "Ajeet",
-      "lastName": "Raj",
-      "address": "10 KalpanaNagar",
-      "city": "Bhopal",
-      "state": "Madhyapradesh",
-      "zip": "110720",
+      "firstName": "Amit",
+      "lastName": "Pawar",
+      "address": "121 Sec-B Bhopal",
+      "city": "Bhopal-DDX",
+      "state": "Bihar",
+      "zip": "88101",
       "phone": "9113173522",
-      "email": "ajeet.raj@example.com"
-    },
-    {
-      "firstName": "Ajeet",
-      "lastName": "Raj",
-      "address": "10 KalpanaNagar",
-      "city": "Bhopal",
-      "state": "Madhyapradesh",
-      "zip": "110720",
-      "phone": "9113173522",
-      "email": "ankit.rajput@example.com"
+      "email": "amit.pawar@example.com"
     }
-  ],
-  "Ajeet-Work": []
+  ]
 }

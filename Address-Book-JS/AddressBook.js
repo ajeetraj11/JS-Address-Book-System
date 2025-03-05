@@ -219,7 +219,19 @@ class AddressBook {
       this.saveAddressBooks();
       console.log(`Contact '${firstName} ${lastName}' deleted successfully!`);
     }
-  }
+  } 
+  // countContacts method to count the contacts in the address book
+  countContacts(bookName) {
+    if (!this.addressBooks[bookName]) {
+        console.log(`Address Book '${bookName}' does not exist.`);
+        return 0;
+    }
+
+    // Use reduce function to count the contacts
+    const contactCount = this.addressBooks[bookName].reduce((count) => count + 1, 0);
+    console.log(`Total contacts in '${bookName}': ${contactCount}`);
+    return contactCount;
+}
 }
 
 // Example Usage to create an address book and add a contact
@@ -229,12 +241,12 @@ addressBookApp.addContact(
   "Ajeet-Personal",
   "Ajeet",
   "Raj",
-  "10 KalpanaNagar",
+  "121 Sec-A Bhopal",
   "Bhopal",
   "Madhyapradesh",
   "110720",
-  "9113173522",
-  "ankit.rajput@example.com"
+  "6203106619",
+  "ajeet.raj@example.com"
 );
 addressBookApp.viewContacts("Ajeet-Personal");
 
@@ -246,15 +258,16 @@ addressBookApp.addContact(
   "121 Sec-B Bhopal",
   "Bhopal-DDX",
   "Bihar",
-  "78001",
-  "6203106620",
+  "88101",
+  "9113173522",
   "amit.pawar@example.com"
 );
 addressBookApp.viewContacts("Ajeet-Work");
 
 addressBookApp.editContact("Ajeet-Personal", "Ajeet", "Raj", {
-  phone: "9113173522",
+  phone: "6203106619",
 });
  
 
-addressBookApp.deleteContact("Ajeet-Work", "Amit", "Pawar");
+addressBookApp.deleteContact("Ajeet-Personal", "Ajeet", "Raj"); 
+addressBookApp.countContacts("Ajeet-Work");
