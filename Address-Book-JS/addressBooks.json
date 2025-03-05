@@ -2,14 +2,14 @@
   "Ajeet-Personal": [],
   "Ajeet-Work": [
     {
-      "firstName": "Amit",
-      "lastName": "Pawar",
+      "firstName": "Vishal",
+      "lastName": "Kumar",
       "address": "121 Sec-B Bhopal",
       "city": "Bhopal-DDX",
       "state": "Bihar",
-      "zip": "88101",
+      "zip": "78001",
       "phone": "9113173522",
-      "email": "amit.pawar@example.com"
+      "email": "vishal.kumar@example.com"
     }
   ]
 }
