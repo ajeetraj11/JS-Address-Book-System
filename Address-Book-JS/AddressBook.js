@@ -295,7 +295,23 @@ class AddressBook {
     });
 
     console.log("Address book sorted by name:", this.addressBooks);
+} 
+
+sortBy(field) {
+  if (!["city", "state", "zip"].includes(field)) {
+      console.error("Invalid sort field. Choose 'city', 'state', or 'zip'.");
+      return;
+  }
+
+  Object.keys(this.addressBooks).forEach(bookName => {
+      this.addressBooks[bookName].sort((a, b) => 
+          a[field].toString().localeCompare(b[field].toString())
+      );
+  });
+
+  console.log(`Address book sorted by ${field}:`, this.addressBooks);
 }
+
   
   
 }
@@ -311,7 +327,7 @@ addressBookApp.addContact(
   "Bhopal",
   "Madhyapradesh",
   "110720",
-  "9770543210",
+  "6203106619",
   "ajeet.raj@example.com"
 );
 addressBookApp.viewContacts("Ajeet-Personal");
@@ -326,7 +342,7 @@ addressBookApp.addContact(
   "Bihar",
   "88101",
   "9113173522",
-  "vishal.pawar@example.com"
+  "vishal.kumar@example.com"
 );
 addressBookApp.viewContacts("Ajeet-Work");
 
@@ -339,4 +355,7 @@ addressBookApp.countContacts("Ajeet-Work");
 
 addressBookApp.searchByCityOrState("Bhopal"); 
 
-addressBookApp.sortByName();
+addressBookApp.sortByName(); 
+
+//SortBy method to sort the Address Book Entries by City , State or Zip.
+addressBookApp.sortBy("city"); 
