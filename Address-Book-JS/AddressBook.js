@@ -105,6 +105,7 @@ class AddressBook {
       return;
     }
 
+    // Try to add the contact with validation
     try {
       // Validation of contact details
       this.validateContact(
@@ -280,8 +281,8 @@ addressBookApp.addContact(
   "121 Sec-A Bhopal",
   "Bhopal",
   "Madhyapradesh",
-  "110720",
-  "6203106619",
+  "271203",
+  "6203106618",
   "ajeet.raj@example.com"
 );
 addressBookApp.viewContacts("Ajeet-Personal");
@@ -294,14 +295,14 @@ addressBookApp.addContact(
   "121 Sec-B Bhopal",
   "Bhopal-DDX",
   "Bihar",
-  "78001",
+  "88101",
   "9113173522",
   "vishal.kumar@example.com"
 );
 addressBookApp.viewContacts("Ajeet-Work");
 
 addressBookApp.editContact("Ajeet-Personal", "Ajeet", "Raj", {
-  phone: "6203106619",
+  phone: "6203106620",
 });
 
 addressBookApp.deleteContact("Ajeet-Personal", "Ajeet", "Raj");
